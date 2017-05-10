@@ -1,0 +1,23 @@
+{
+  "name": "algorithm-study",
+  "version": "1.0.0",
+  "description": "Solutions to questions from Cracking the Coding Interview",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^3.3.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amacdougall/algorithm-study.git"
+  },
+  "author": "Alan MacDougall",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amacdougall/algorithm-study/issues"
+  },
+  "homepage": "https://github.com/amacdougall/algorithm-study#readme"
+}
