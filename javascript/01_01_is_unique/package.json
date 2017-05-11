@@ -1,0 +1,15 @@
+{
+  "name": "is-unique",
+  "version": "1.0.0",
+  "description": "Algorithm to determine if characters in a string are unique.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  },
+  "author": "Alan MacDougall",
+  "license": "ISC",
+  "dependencies": {
+    "mocha": "^3.3.0"
+  },
+  "private": true
+}
