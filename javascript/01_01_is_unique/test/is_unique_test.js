@@ -1,22 +1,32 @@
-const isUnique = require("../src/is_unique");
+const Unique = require("../src/is_unique");
 const assert = require("assert");
 
-describe("isUnique", function() {
+describe("testing uniqueness of characters within a string", function() {
+  describe("using a naive implementation", function() {
+    testUniquenessWith(Unique.naive);
+  });
+
+  describe("using a RAM-optimized implementation", function() {
+    testUniquenessWith(Unique.compact);
+  });
+});
+
+function testUniquenessWith(f) {
   it("should pass the empty string", function() {
-    assert.ok(isUnique(""));
+    assert.ok(f(""));
   });
 
   it("should pass strings of unique characters", function() {
-    assert(isUnique("a"));
-    assert(isUnique("ba"));
-    assert(isUnique("abc"));
+    assert(f("a"));
+    assert(f("ba"));
+    assert(f("abc"));
   });
 
   it("should fail strings with contiguous repeated characters", function() {
-    assert(!isUnique("aa"));
+    assert(!f("aa"));
   });
 
   it("should fail strings with non-contiguous repeated characters", function() {
-    assert(!isUnique("aba"));
+    assert(!f("aba"));
   });
-});
+}
