@@ -4,7 +4,7 @@
   "description": "Algorithm to determine if characters in a string are unique.",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha"
+    "test": "mocha"
   },
   "author": "Alan MacDougall",
   "license": "ISC",
