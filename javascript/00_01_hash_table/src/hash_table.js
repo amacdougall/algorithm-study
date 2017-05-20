@@ -1,5 +1,7 @@
 const hashCode = require("./hash_code");
 
+const REHASH_THRESHOLD = 0.75;
+
 class HashTable {
   /**
    * Given a JavaScript object, create a new HashTable instance with those
@@ -46,8 +48,14 @@ class HashTable {
     } else {
       const code = this.hashCode(key);
       const bucketIndex = code % this.bucketCount;
+
       if (this.buckets[bucketIndex] === undefined) {
         this.buckets[bucketIndex] = [[key, value]];
+        this.bucketsUsed += 1;
+
+        if (this.bucketsUsed >= this.bucketCount * REHASH_THRESHOLD) {
+          this.expand();
+        }
       } else {
         const bucket = this.buckets[bucketIndex];
         const entry = findEntry(bucket, key);
@@ -79,6 +87,20 @@ class HashTable {
    */
   map(f) {
 
+  }
+
+  /**
+   * Double the bucket count and rehash all existing values.
+   */
+  expand() {
+    let oldBuckets = this.buckets;
+    this.bucketCount *= 2;
+    this.bucketsUsed = 0;
+    this.buckets = [];
+
+    oldBuckets.forEach(bucket => {
+      bucket.forEach(entry => this.set.apply(this, entry));
+    });
   }
 }
 
