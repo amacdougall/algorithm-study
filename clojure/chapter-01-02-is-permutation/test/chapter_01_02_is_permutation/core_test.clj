@@ -2,7 +2,7 @@
   (:require [clojure.test :refer :all]
             [chapter-01-02-is-permutation.core :refer [is-permutation?]]))
 
-(deftest a-test
+(deftest test-is-permutation
   (is (is-permutation? "" ""))
   (is (is-permutation? "a" "a"))
   (is (not (is-permutation? "a" "aa")))
