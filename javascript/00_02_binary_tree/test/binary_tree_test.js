@@ -195,7 +195,6 @@ describe("getting from a binary tree by key", function() {
       value: {id: 50, name: "root"}
     });
 
-
     this.binaryTree.insert({value: {id: 25, name: "01_left"}});
     this.binaryTree.insert({value: {id: 15, name: "02_left"}});
     this.binaryTree.insert({value: {id: 5, name: "03_left"}});
@@ -255,5 +254,59 @@ describe("getting from a binary tree by key", function() {
     result = this.binaryTree.get(42);
     assert.ok(result);
     assert.equal("03_middle", result.name);
+  });
+});
+
+describe("removing a node", function() {
+  beforeEach(function() {
+    this.binaryTree = new BinaryTree({
+      keyFunction: v => v.id,
+      value: {id: 50, name: "root"}
+    });
+
+    // names represent pre-delete path from root
+    this.binaryTree.insert({value: {id: 25, name: "left"}});
+    this.binaryTree.insert({value: {id: 15, name: "left_left"}});
+    this.binaryTree.insert({value: {id: 20, name: "left_left_right"}});
+    this.binaryTree.insert({value: {id: 30, name: "left_right"}});
+    this.binaryTree.insert({value: {id: 35, name: "left_right_right"}});
+    this.binaryTree.insert({value: {id: 75, name: "right"}});
+    this.binaryTree.insert({value: {id: 90, name: "right_right"}});
+  });
+
+  /* */
+  it("should remove leaf nodes entirely", function() {
+    this.binaryTree.remove(90);
+    assert.equal(null, this.binaryTree.get(90));
+    assert.ok(this.binaryTree.right.right == null);
+  });
+
+  /*
+  it("when removing a node with one child, should promote the child", function() {
+    let target = this.binaryTree.right;
+    let child = this.binaryTree.right.right;
+
+    this.binaryTree.remove(75);
+    assert.equal(child, this.binaryTree.right);
+    assert.ok(this.binaryTree.right.right == null);
+    assert.equal(null, this.binaryTree.get(75));
+  });
+  /* */
+
+  it("when removing a node with two children, should promote the in-order predecessor", function() {
+    let target = this.binaryTree.left;
+    let predecessor = this.binaryTree.left.left.right;
+    let earliest = this.binaryTree.left.left;
+
+    // sanity check
+    assert.equal(this.binaryTree.get(25), target.value);
+    assert.equal(this.binaryTree.get(20), predecessor.value);
+    assert.equal(this.binaryTree.get(15), earliest.value);
+
+    /* *
+    this.binaryTree.remove(25);
+    assert.equal(predecessor, this.binaryTree.left);
+    assert.equal(earliest, this.binaryTree.left.left);
+    /* */
   });
 });
