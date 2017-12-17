@@ -1,5 +1,5 @@
 require "minitest/autorun"
-require "./is_unique"
+require "./lib/is_unique"
 
 class TestIsUnique < MiniTest::Unit::TestCase
   def test_fast_algorithm_success
