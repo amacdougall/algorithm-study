@@ -7,7 +7,20 @@
   ; simplistic, but will validate the test suite
   (apply distinct? (str/split s #"")))
 
-(defn fast-is-unique? [s]
+; This implementation runs in O(n) time, at the cost of maintaining a Set.
+(defn fast-is-unique?
+  "True if the supplied string contains no repeating characters."
+  [s]
+  (loop [cs (seq s)
+         known #{}]
+    (cond
+      (contains? known (first cs)) false
+      (empty? cs) true
+      :else (recur (rest cs) (conj known (first cs))))))
+
+; This implementation uses no additional data structure, and runs in
+; amortized O(2n) time.
+(defn compact-is-unique? [s]
   (cond
     (< (count s) 2) true ; 0 and 1-length strings are unique
     :else

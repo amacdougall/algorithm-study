@@ -6,6 +6,10 @@ describe("testing uniqueness of characters within a string", function() {
     testUniquenessWith(Unique.naive);
   });
 
+  describe("using a CPU-optimized implementation", function() {
+    testUniquenessWith(Unique.fast);
+  });
+
   describe("using a RAM-optimized implementation", function() {
     testUniquenessWith(Unique.compact);
   });

@@ -18,3 +18,6 @@
 
 (deftest test-fast-is-unique
   (test-uniqueness-function fast-is-unique?))
+
+(deftest test-compact-is-unique
+  (test-uniqueness-function compact-is-unique?))
