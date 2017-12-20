@@ -59,6 +59,44 @@ class TreeNode {
       }
     }
   }
+
+  /**
+   * Removes the supplied value, or the value with the supplied key. Throws
+   * ArgumentError if neither a key nor a value is supplied.
+   *
+   * @param {*} [options.value] - The value to remove.
+   * @param {*} [options.key] - An explicit key for the value to be removed.
+   *
+   * @return {*} The value which was removed, or null if no value was found.
+   */
+  remove({value = null, key = null}) {
+    if (!(value || key)) {
+      throw new ArgumentError("BinaryTree.remove was called without a value or a key.");
+    }
+
+    key = key || this.keyFunction(value);
+
+    if (this.key === key) {
+      // The root node is targeted for deletion! Simply null out the value.
+      // This is a special case. In all other cases, node.remove will affect
+      // its child tree.
+      this.value = null;
+      return this.value;
+    } else {
+      let branch = (key < this.key) ? "left" : "right";
+
+      if (!this[branch]) {
+        // no node with this key exists
+        return null;
+      } else {
+        if (this[branch].key === key) {
+          // TODO: node deletion behavior
+        } else {
+          this[branch].remove({key: key, value: value});
+        }
+      }
+    }
+  }
 }
 
 // Client code will require this as BinaryTree; this is fine.
