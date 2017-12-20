@@ -274,9 +274,8 @@ describe("removing a node", function() {
     this.binaryTree.insert({value: {id: 90, name: "right_right"}});
   });
 
-  /* */
   it("should remove leaf nodes entirely", function() {
-    this.binaryTree.remove(90);
+    this.binaryTree.remove({key: 90});
     assert.equal(null, this.binaryTree.get(90));
     assert.ok(this.binaryTree.right.right == null);
   });
@@ -286,12 +285,11 @@ describe("removing a node", function() {
     let target = this.binaryTree.right;
     let child = this.binaryTree.right.right;
 
-    this.binaryTree.remove(75);
+    this.binaryTree.remove({key: 75});
     assert.equal(child, this.binaryTree.right);
     assert.ok(this.binaryTree.right.right == null);
     assert.equal(null, this.binaryTree.get(75));
   });
-  /* */
 
   it("when removing a node with two children, should promote the in-order predecessor", function() {
     let target = this.binaryTree.left;
@@ -303,10 +301,9 @@ describe("removing a node", function() {
     assert.equal(this.binaryTree.get(20), predecessor.value);
     assert.equal(this.binaryTree.get(15), earliest.value);
 
-    /* *
-    this.binaryTree.remove(25);
+    this.binaryTree.remove({key: 25});
     assert.equal(predecessor, this.binaryTree.left);
     assert.equal(earliest, this.binaryTree.left.left);
-    /* */
   });
+  */
 });

@@ -62,7 +62,7 @@ class TreeNode {
 
   /**
    * Removes the supplied value, or the value with the supplied key. Throws
-   * ArgumentError if neither a key nor a value is supplied.
+   * Error if neither a key nor a value is supplied.
    *
    * @param {*} [options.value] - The value to remove.
    * @param {*} [options.key] - An explicit key for the value to be removed.
@@ -71,7 +71,7 @@ class TreeNode {
    */
   remove({value = null, key = null}) {
     if (!(value || key)) {
-      throw new ArgumentError("BinaryTree.remove was called without a value or a key.");
+      throw new Error("BinaryTree.remove was called without a value or a key.");
     }
 
     key = key || this.keyFunction(value);
@@ -89,12 +89,18 @@ class TreeNode {
         // no node with this key exists
         return null;
       } else {
+        // deletion target found
         if (this[branch].key === key) {
-          // TODO: node deletion behavior
+          if (this[branch].left == null && this[branch].right == null) {
+            // if child has no branches, null out the child
+            this[branch] = null;
+          }
+          // TODO: handle more cases
         } else {
-          this[branch].remove({key: key, value: value});
+          // recursively attempt to delete this key within target branch
+          this[branch].remove({key});
         }
-      }
+      } 
     }
   }
 }
