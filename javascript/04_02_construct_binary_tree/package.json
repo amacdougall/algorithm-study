@@ -1,0 +1,15 @@
+{
+  "name": "04_02_construct_binary_tree",
+  "version": "1.0.0",
+  "description": "Function to construct a balanced binary tree from a sorted array of integers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Alan MacDougall",
+  "license": "ISC",
+  "private": true,
+  "devDependencies": {
+    "mocha": "^4.1.0"
+  }
+}
